@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/meanii/tcp.chat/server"
-)
+import "github.com/meanii/tcp.chat/internal/server"
 
 func main() {
 	tcpServer := server.NewTCPServer(server.Server{

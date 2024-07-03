@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/meanii/tcp.chat/cmd"
+	"github.com/meanii/tcp.chat/internal/plugins"
 )
 
 var Message = make(chan net.Conn)
@@ -48,5 +48,5 @@ func (s *Server) Start() {
 }
 
 func (c *Connections) handlerRawTCPRequest() {
-	cmd.HandleRawTCPConnections(c.Conn)
+	plugins.RegisterPluginsWithTCPConnnections(c)
 }
