@@ -1,9 +1,7 @@
 package plugins
 
 import (
-	"fmt"
-	"net"
-	"strings"
+	"github.com/meanii/tcp.chat/internal/pkg"
 )
 
 func init() {
@@ -11,9 +9,9 @@ func init() {
 		name:          "login",
 		description:   "login to the app",
 		priorityIndex: 1,
-		function: func(conn net.Conn, message string) error {
-			id := strings.TrimSpace(strings.Join(strings.Split(message, " ")[1:], ""))
-			conn.Write([]byte(fmt.Sprintf("%s welcome to the chat!\n\n%s > ", id, id)))
+		function: func(args pluginFuncArgs) error {
+			user := args.users.Create(args.message, args.conn)
+			pkg.NewMessage(args.conn, user.Id, "welcome to the chat!")
 			return nil
 		},
 	})
