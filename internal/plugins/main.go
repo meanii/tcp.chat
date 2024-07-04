@@ -25,12 +25,12 @@ type plugin struct {
 	function      func(pluginFuncArgs) error
 }
 
-var plugins map[string]plugin = make(map[string]plugin)
+var plugins map[string]*plugin = make(map[string]*plugin)
 var users = pkg.InitUsersInstance()
 var rooms = pkg.InitRoomsInstance()
 
 func registerPlugin(plugin plugin) {
-	plugins[plugin.name] = plugin
+	plugins[plugin.name] = &plugin
 }
 
 func RegisterPluginsWithTCPConnnections(conn net.Conn) {
