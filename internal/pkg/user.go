@@ -35,6 +35,9 @@ func (u *Users) GetUser(conn net.Conn) *User {
 	u.mutext.RLock()
 	defer u.mutext.RUnlock()
 
-	user := u.Users[conn.RemoteAddr().String()]
+	user, ok := u.Users[conn.RemoteAddr().String()]
+	if !ok {
+		return &User{Id: "", Conn: conn}
+	}
 	return &user
 }
